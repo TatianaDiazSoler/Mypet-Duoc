@@ -34,7 +34,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="55" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,21 +57,19 @@
                               <Component id="j_fechnaci" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
                               <Component id="j_vigente" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="97" max="32767" attributes="0"/>
+                          <EmptySpace pref="102" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="j_sexo_mascota_M" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="j_sexo_mascota_F" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <Component id="j_vigente_opcion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="j_nombre_mascota_texto" alignment="0" min="-2" pref="197" max="-2" attributes="0"/>
-                              <Component id="j_fechnaci_texto" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="j_codigo_texto" min="-2" pref="119" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="j_buscarMascot_boton" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="j_fechnaci_texto" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="j_nombre_mascota_texto" alignment="0" pref="197" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="JSexo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -85,16 +83,10 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="j_tipo_mascota_select" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="j_rut_cliente_select" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="j_listarMascot_boton" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="j_tipo_mascota_select" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="j_rut_cliente_select" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -118,27 +110,28 @@
                   <Component id="J_mascota" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="j_codigo_mascota" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="j_codigo_texto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="j_buscarMascot_boton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="j_codigo_mascota" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="j_codigo_texto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="j_buscarMascot_boton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="j_nombre_mascota" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="j_nombre_mascota_texto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="j_fechnaci" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="j_fechnaci_texto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="j_sexo" min="-2" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="j_nombre_mascota" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="j_nombre_mascota_texto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="j_fechnaci" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="j_fechnaci_texto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="j_sexo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="j_sexo_mascota_M" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="j_sexo_mascota_F" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JSexo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -150,21 +143,12 @@
                       <Component id="j_tipo_mascota" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="j_tipo_mascota_select" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="j_rut_cliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="j_rut_cliente_select" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="37" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
-                          <Component id="j_listarMascot_boton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="j_rut_cliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="j_rut_cliente_select" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="j_ingresarMascot_boton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="j_limpiarMascot_boton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -237,6 +221,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="limpiar"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="j_limpiarMascot_botonMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="j_fechnaci_texto">
           <Properties>
@@ -267,19 +254,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="j_codigo_textoActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="j_sexo_mascota_M">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="M"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="j_sexo_mascota_MActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="j_sexo_mascota_F">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="F"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="j_vigente">
           <Properties>
@@ -367,16 +341,18 @@
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="j_listarMascot_boton">
+        <Component class="javax.swing.JComboBox" name="JSexo">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Myanmar Text" size="12" style="1"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="2">
+                <StringItem index="0" value="M"/>
+                <StringItem index="1" value="F"/>
+              </StringArray>
             </Property>
-            <Property name="text" type="java.lang.String" value="Listar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="j_listarMascot_botonActionPerformed"/>
-          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import mypet.Controlador.Crud_Mascota;
+import mypet.Modelo.Mascota;
 
 /**
  *
@@ -20,7 +22,7 @@ public class Vista_Mascota extends javax.swing.JFrame {
      */
     public Vista_Mascota() {
         initComponents();
-        
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -43,8 +45,6 @@ public class Vista_Mascota extends javax.swing.JFrame {
         j_fechnaci_texto = new javax.swing.JTextField();
         j_nombre_mascota_texto = new javax.swing.JTextField();
         j_codigo_texto = new javax.swing.JTextField();
-        j_sexo_mascota_M = new javax.swing.JRadioButton();
-        j_sexo_mascota_F = new javax.swing.JRadioButton();
         j_vigente = new javax.swing.JLabel();
         j_vigente_opcion = new javax.swing.JCheckBox();
         j_tipo_mascota = new javax.swing.JLabel();
@@ -54,7 +54,7 @@ public class Vista_Mascota extends javax.swing.JFrame {
         j_modificarMascot_boton = new javax.swing.JButton();
         j_eliminarMascot_boton = new javax.swing.JButton();
         j_buscarMascot_boton = new javax.swing.JButton();
-        j_listarMascot_boton = new javax.swing.JButton();
+        JSexo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +85,11 @@ public class Vista_Mascota extends javax.swing.JFrame {
 
         j_limpiarMascot_boton.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
         j_limpiarMascot_boton.setText("limpiar");
+        j_limpiarMascot_boton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                j_limpiarMascot_botonMouseClicked(evt);
+            }
+        });
 
         j_fechnaci_texto.setFont(new java.awt.Font("Myanmar Text", 0, 12)); // NOI18N
         j_fechnaci_texto.addActionListener(new java.awt.event.ActionListener() {
@@ -106,15 +111,6 @@ public class Vista_Mascota extends javax.swing.JFrame {
                 j_codigo_textoActionPerformed(evt);
             }
         });
-
-        j_sexo_mascota_M.setText("M");
-        j_sexo_mascota_M.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                j_sexo_mascota_MActionPerformed(evt);
-            }
-        });
-
-        j_sexo_mascota_F.setText("F");
 
         j_vigente.setFont(new java.awt.Font("Myanmar Text", 0, 12)); // NOI18N
         j_vigente.setText("Vigente:");
@@ -140,13 +136,7 @@ public class Vista_Mascota extends javax.swing.JFrame {
         j_buscarMascot_boton.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
         j_buscarMascot_boton.setText("Buscar");
 
-        j_listarMascot_boton.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
-        j_listarMascot_boton.setText("Listar");
-        j_listarMascot_boton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                j_listarMascot_botonActionPerformed(evt);
-            }
-        });
+        JSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -163,19 +153,17 @@ public class Vista_Mascota extends javax.swing.JFrame {
                             .addComponent(j_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(j_fechnaci, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(j_vigente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(j_sexo_mascota_M)
-                                .addGap(18, 18, 18)
-                                .addComponent(j_sexo_mascota_F))
                             .addComponent(j_vigente_opcion)
-                            .addComponent(j_nombre_mascota_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(j_fechnaci_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(j_codigo_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(j_buscarMascot_boton)))
+                                .addComponent(j_buscarMascot_boton))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(j_fechnaci_texto, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(j_nombre_mascota_texto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
+                            .addComponent(JSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -186,13 +174,9 @@ public class Vista_Mascota extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(97, 97, 97)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(j_tipo_mascota_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(j_rut_cliente_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(j_listarMascot_boton))))
+                                    .addComponent(j_tipo_mascota_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(j_rut_cliente_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(j_modificarMascot_boton)
@@ -209,23 +193,23 @@ public class Vista_Mascota extends javax.swing.JFrame {
                 .addComponent(J_mascota)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(j_codigo_mascota)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(j_codigo_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(j_buscarMascot_boton)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(j_nombre_mascota)
-                    .addComponent(j_nombre_mascota_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(j_fechnaci)
-                    .addComponent(j_fechnaci_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(j_sexo)
-                    .addComponent(j_sexo_mascota_M)
-                    .addComponent(j_sexo_mascota_F))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(j_codigo_mascota)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(j_codigo_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(j_buscarMascot_boton)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(j_nombre_mascota)
+                            .addComponent(j_nombre_mascota_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(j_fechnaci)
+                            .addComponent(j_fechnaci_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(j_sexo))
+                    .addComponent(JSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(j_vigente)
@@ -234,17 +218,11 @@ public class Vista_Mascota extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(j_tipo_mascota)
                     .addComponent(j_tipo_mascota_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(j_rut_cliente)
-                            .addComponent(j_rut_cliente_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(j_listarMascot_boton)
-                        .addGap(28, 28, 28)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(j_rut_cliente)
+                    .addComponent(j_rut_cliente_select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(j_ingresarMascot_boton)
                     .addComponent(j_limpiarMascot_boton)
@@ -266,7 +244,7 @@ public class Vista_Mascota extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,10 +262,6 @@ public class Vista_Mascota extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_j_codigo_textoActionPerformed
 
-    private void j_sexo_mascota_MActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_sexo_mascota_MActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_j_sexo_mascota_MActionPerformed
-
     private void j_ingresarMascot_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_ingresarMascot_botonActionPerformed
     /*int codigo=j_codigo_texto.                           AGREGUÉ                */
     String nombre=j_nombre_mascota_texto.getText();
@@ -299,23 +273,27 @@ public class Vista_Mascota extends javax.swing.JFrame {
     } catch (ParseException ex) {
             JOptionPane.showMessageDialog(this,"Formato de Fecha Incorrecta...Por favor ingresar con formato dd/mm/yyyy");
     }
-    String sexo=null;
-    if (j_sexo_mascota_M.isSelected())
-        sexo="Maculino";
-    if (j_sexo_mascota_F.isSelected())
-        sexo="Femenino";
+    String sexo=JSexo.getSelectedItem().toString();
     boolean vigente=j_vigente_opcion.isSelected(); /*NO SE COLOR EL TIPO MASCOTA Y RUT CLIENTE*/
-    /*  Mascota masc=new Mascota(codigo,nombre,fec_nac,sexo,vigente); 
-        Crud_Mascota crud=new Crud_Mascota();
-        crud.Agregar(masc);
-        JOptionPane.showMessageDialog(this,"Mascota Ingresada Exitosamente!!!");*/
+    Mascota masc=new Mascota(0,nombre,fec_nac,sexo,vigente,null,null); 
+    Crud_Mascota crud=new Crud_Mascota();
+    try{
+        crud.agregar(masc);
+    }catch(){
+        
+    }
+    
+    JOptionPane.showMessageDialog(this,"Mascota Ingresada Exitosamente!!!");
 // TODO add your handling code here:
     }//GEN-LAST:event_j_ingresarMascot_botonActionPerformed
 
-    private void j_listarMascot_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_listarMascot_botonActionPerformed
-        new Vista_ListaMascota().setVisible(true);   /*AGREGUEÉ*/
+    private void j_limpiarMascot_botonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j_limpiarMascot_botonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_j_listarMascot_botonActionPerformed
+        j_codigo_texto.setText("");
+        j_nombre_mascota_texto.setText("");
+        j_fechnaci_texto.setText("");
+        
+    }//GEN-LAST:event_j_limpiarMascot_botonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -353,6 +331,7 @@ public class Vista_Mascota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> JSexo;
     private javax.swing.JLabel J_mascota;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton j_buscarMascot_boton;
@@ -363,15 +342,12 @@ public class Vista_Mascota extends javax.swing.JFrame {
     private javax.swing.JTextField j_fechnaci_texto;
     private javax.swing.JButton j_ingresarMascot_boton;
     private javax.swing.JButton j_limpiarMascot_boton;
-    private javax.swing.JButton j_listarMascot_boton;
     private javax.swing.JButton j_modificarMascot_boton;
     private javax.swing.JLabel j_nombre_mascota;
     private javax.swing.JTextField j_nombre_mascota_texto;
     private javax.swing.JLabel j_rut_cliente;
     private javax.swing.JComboBox<String> j_rut_cliente_select;
     private javax.swing.JLabel j_sexo;
-    private javax.swing.JRadioButton j_sexo_mascota_F;
-    private javax.swing.JRadioButton j_sexo_mascota_M;
     private javax.swing.JLabel j_tipo_mascota;
     private javax.swing.JComboBox<String> j_tipo_mascota_select;
     private javax.swing.JLabel j_vigente;
