@@ -16,8 +16,6 @@ public class Vista_cliente extends javax.swing.JFrame {
      */
     public Vista_cliente() {
         initComponents();
-		CrudCliente crudcliente=new CrudCliente();
-		List <Cliente> lista_cliente=new ArrayList <>();
 
     }
 

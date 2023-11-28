@@ -4,6 +4,8 @@
  */
 package mypet;
 
+import mypet.Vista.Vista_cliente;
+
 /**
  *
  * @author Tatiana Diaz y Anibal Montecinos
@@ -14,9 +16,11 @@ public class Mypet {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Crud_Cliente cliente=new Crud_Cliente();
-        new Proyecto(Vista_cliente).setVisible(true);
-        // TODO code application logic here
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Vista_cliente().setVisible(true);
+            }
+        });
     }
     
 }

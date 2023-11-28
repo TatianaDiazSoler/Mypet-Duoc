@@ -4,6 +4,8 @@
  */
 package mypet.Controlador;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,13 +48,13 @@ public class Crud_Clientes {
         Connection conn=con.conectarBD("MyPet");
         try {
             stmt = conn.createStatement(); 
-            if (opc==-1)
-    /*            rs = stmt.executeQuery("select rut||'-'||dv "Rut", nombre||' '||apepat||' '||apemat "Nombre" from cliente");*/
-            else
-    /*            rs = stmt.executeQuery("select rut||'-'||dv "Rut", nombre||' '||apepat||' '||apemat "Nombre" from cliente"+opc);*/        
+            if (opc==-1){
+                rs = stmt.executeQuery("select * from cliente");
+            }else{
+                rs = stmt.executeQuery("select * from cliente where rut = "+opc);
+            }
             DefaultTableModel DT=new DefaultTableModel();
             DT.addColumn("Rut");
-            DT.addColumn("Dv");
             DT.addColumn("Nombre");
             DT.addColumn("Apellido paterno");
             DT.addColumn("Apellido Materno");
@@ -84,7 +86,7 @@ public class Crud_Clientes {
             stmt.setString(2, cli.getApepat());
             stmt.setString(3, cli.getApepat());
             stmt.setString(4, cli.getRut());
-            stmt.setString(5,cli.dv());
+            stmt.setString(5,cli.getDv());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -127,7 +129,7 @@ public class Crud_Clientes {
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(CrudCliente.class.getName()).log(Level.SEVERE, null, ex);
+            
         }     
         return false;
     }     
