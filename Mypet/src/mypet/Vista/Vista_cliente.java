@@ -5,6 +5,10 @@
 package mypet.Vista;
 
 import java.util.ArrayList;
+import mypet.Controlador.Crud_Mascota;
+import mypet.Controlador.Crud_Clientes;
+import net.coderazzi.filters.gui.AutoChoices;
+import net.coderazzi.filters.gui.TableFilterHeader;
 /**
  *
  * @author Tatiana Diaz y Anibal Montecinos
@@ -14,9 +18,17 @@ public class Vista_cliente extends javax.swing.JFrame {
     /**
      * Creates new form Vista_cliente
      */
+    private Crud_Mascota crudM = new Crud_Mascota();
+    
+    private Crud_Clientes crudC = new Crud_Clientes();
+    private TableFilterHeader filterHeader;
+    
+    
     public Vista_cliente() {
         initComponents();
-
+        jTable1.setModel(crudM.listarMascota(""));
+        filterHeader = new TableFilterHeader(jTable1,AutoChoices.ENABLED);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -46,7 +58,7 @@ public class Vista_cliente extends javax.swing.JFrame {
         j_modificar_boton = new javax.swing.JButton();
         j_Eliminar_boton = new javax.swing.JButton();
         j_buscar_boton = new javax.swing.JButton();
-        j_Listar_boton = new javax.swing.JButton();
+        selmasc = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -139,11 +151,10 @@ public class Vista_cliente extends javax.swing.JFrame {
         j_buscar_boton.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
         j_buscar_boton.setText("Buscar");
 
-        j_Listar_boton.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
-        j_Listar_boton.setText("Listar");
-        j_Listar_boton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                j_Listar_botonActionPerformed(evt);
+        selmasc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mascotas", "Clientes" }));
+        selmasc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selmascItemStateChanged(evt);
             }
         });
 
@@ -155,9 +166,7 @@ public class Vista_cliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(j_buscar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(j_Listar_boton))
+                        .addComponent(j_buscar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(j_apepat, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,6 +197,10 @@ public class Vista_cliente extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(j_dv_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(j_nom_texto, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(selmasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,8 +217,7 @@ public class Vista_cliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(j_nombre)
-                    .addComponent(j_nom_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(j_Listar_boton))
+                    .addComponent(j_nom_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(j_apepat)
@@ -220,7 +232,9 @@ public class Vista_cliente extends javax.swing.JFrame {
                     .addComponent(j_limpiar_boton)
                     .addComponent(j_modificar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(j_Eliminar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addComponent(selmasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -243,7 +257,7 @@ public class Vista_cliente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,17 +312,16 @@ public class Vista_cliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(178, 178, 178)
-                        .addComponent(j_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 258, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(j_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +332,7 @@ public class Vista_cliente extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -358,10 +371,15 @@ public class Vista_cliente extends javax.swing.JFrame {
     // TODO add your handling code here:
     }//GEN-LAST:event_j_ingresar_botonActionPerformed
 
-    private void j_Listar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_Listar_botonActionPerformed
-        new Vista_ListaClientes().setVisible(true);   /*AGREGUÉ*/
+    private void selmascItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selmascItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_j_Listar_botonActionPerformed
+        
+        if (selmasc.getSelectedItem()=="Mascotas"){
+            jTable1.setModel(crudM.listarMascota(""));
+        }else{
+            jTable1.setModel(crudC.listarClientes(""));
+        }
+    }//GEN-LAST:event_selmascItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -406,7 +424,6 @@ public class Vista_cliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton j_Eliminar_boton;
-    private javax.swing.JButton j_Listar_boton;
     private javax.swing.JLabel j_Titulo;
     private javax.swing.JLabel j_apemat;
     private javax.swing.JTextField j_apemat_texto;
@@ -432,5 +449,6 @@ public class Vista_cliente extends javax.swing.JFrame {
     private javax.swing.JLabel j_rut;
     private javax.swing.JTextField j_rut_texto;
     private javax.swing.JLabel j_sep_rut;
+    private javax.swing.JComboBox<String> selmasc;
     // End of variables declaration//GEN-END:variables
 }

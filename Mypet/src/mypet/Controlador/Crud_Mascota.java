@@ -19,6 +19,10 @@ import mypet.Util.Conexion;
  */
 public class Crud_Mascota {  
     
+    
+    public Crud_Mascota(){
+        
+    }
 
    
     public boolean agregar(Mascota masc) {
@@ -42,17 +46,17 @@ public class Crud_Mascota {
      
 
 
-    public DefaultTableModel listarMascota(int opc) { /* AGREGUÉ */
+    public DefaultTableModel listarMascota(String opc) { /* AGREGUÉ */
         Statement stmt;
         ResultSet rs;
         Conexion con= new Conexion();
         Connection conn=con.conectarBD("MyPet");
         try {
             stmt = conn.createStatement(); 
-            if (opc==-1){
-                rs = stmt.executeQuery("SELECT * FROM mascota JOIN tipo_mascota ON mascota.tipo_id=tipo_mascota.id JOIN cliente ON mascota.rut_cliente = cliete.rut");
+            if (opc.equals("")){
+                rs = stmt.executeQuery("SELECT * FROM mascota JOIN tipo_mascota ON mascota.tipo_id=tipo_mascota.id JOIN cliente ON mascota.rut_cliente = cliente.rut");
             }else{
-                rs = stmt.executeQuery("SELECT * FROM mascota JOIN tipo_mascota ON mascota.tipo_id=tipo_mascota.id JOIN cliente ON mascota.rut_cliente = cliete.rut where mascota.id="+opc);              
+                rs = stmt.executeQuery("SELECT * FROM mascota JOIN tipo_mascota ON mascota.tipo_id=tipo_mascota.id JOIN cliente ON mascota.rut_cliente = cliente.rut where mascota.id="+opc);              
             }
             DefaultTableModel DT=new DefaultTableModel();
             DT.addColumn("codigo");
@@ -68,14 +72,10 @@ public class Crud_Mascota {
                 fila[1]=rs.getString(2);
                 String fecha=new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(3));
                 fila[2]=fecha;
-                fila[3]=rs.getString(4)
-                if (rs.getBoolean(True))
-                    fila[4]="Si";
-                else{s
-                    fila[4]="No";
-                }
-                fila[5]=rs.getString(6);f
-                fila[6]
+                fila[3]=rs.getString(4);
+                fila[4]=rs.getBoolean(5)?"Valido":"Invalido";
+                fila[5]=rs.getString(10)+"-"+rs.getString(11);
+                fila[6]=rs.getString(9);
                 DT.addRow(fila);
             }
             rs.close(); 

@@ -22,6 +22,9 @@ import mypet.Util.Conexion;
  */
 public class Crud_Clientes {
     
+    public Crud_Clientes(){
+    }
+    
     public boolean agregar(Cliente cli) {
         Conexion con= new Conexion();
         Connection conn=con.conectarBD("MyPet");
@@ -41,14 +44,14 @@ public class Crud_Clientes {
         }         
     }
 
-    public DefaultTableModel listarClientes(int opc) {   /* AGREGUÉ */
+    public DefaultTableModel listarClientes(String opc) {   /* AGREGUÉ */
         Statement stmt;
         ResultSet rs;
         Conexion con= new Conexion();
         Connection conn=con.conectarBD("MyPet");
         try {
             stmt = conn.createStatement(); 
-            if (opc==-1){
+            if (opc.equals("")){
                 rs = stmt.executeQuery("select * from cliente");
             }else{
                 rs = stmt.executeQuery("select * from cliente where rut = "+opc);
@@ -58,13 +61,12 @@ public class Crud_Clientes {
             DT.addColumn("Nombre");
             DT.addColumn("Apellido paterno");
             DT.addColumn("Apellido Materno");
-            Object[] fila=new Object[5];
+            Object[] fila=new Object[4];
             while (rs.next()) { 
-                fila[0]=rs.getString(1);
-                fila[1]=rs.getString(2);
-                fila[2]=rs.getString(3);
-                fila[3]=rs.getString(4);
-                fila[4]=rs.getString(5);
+                fila[0]=rs.getString(1)+"-"+rs.getString(2);
+                fila[1]=rs.getString(3);
+                fila[2]=rs.getString(4);
+                fila[3]=rs.getString(5);
                 DT.addRow(fila);
             }
             rs.close(); 
