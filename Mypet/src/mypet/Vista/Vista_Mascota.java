@@ -20,6 +20,7 @@ public class Vista_Mascota extends javax.swing.JFrame {
      */
     public Vista_Mascota() {
         initComponents();
+        
     }
 
     /**
@@ -262,10 +263,10 @@ public class Vista_Mascota extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
